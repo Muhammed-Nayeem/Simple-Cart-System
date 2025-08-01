@@ -6,7 +6,7 @@ const CartProduct = ({ product, idx, productRemoveHandler }) => {
       </h3>
       <p>Price: ${product.price}</p>
       <button
-        onClick={() => productRemoveHandler(product)}
+        onClick={() => productRemoveHandler(idx)}
         className="bg-red-600 text-white text-sm px-2 py-0.5 rounded-md cursor-pointer hover:bg-red-700"
       >
         Remove

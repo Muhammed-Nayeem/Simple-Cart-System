@@ -7,20 +7,11 @@ const Products = ({ productLists }) => {
   let [cartProducts, setCartProducts] = useState([]);
 
   const addToCartHandler = (product) => {
-    // let newCartProducts = [...cartProducts, product];
-    // setCartProducts(newCartProducts);
-    // setCartProducts([...cartProducts, product]);
-    // let isExistProduct = cartProducts.find((cardProduct) => cardProduct.prodId === product.prodId);
-    // if (isExistProduct) {
-    //   alert("Product already is in cart!");
-    // } else {
-    //   setCartProducts((prevCartProducts) => [...prevCartProducts, product]);
-    // }
     setCartProducts((prevCartProducts) => [...prevCartProducts, product]);
   };
 
-  const productRemoveHandler = (product) => {
-    let remainingCartProducts = cartProducts.filter((cardProduct) => cardProduct.prodId !== product.prodId);
+  const productRemoveHandler = (productIndex) => {
+    let remainingCartProducts = cartProducts.filter((_, index) => index !== productIndex);
     setCartProducts(remainingCartProducts);
   };
 
@@ -44,7 +35,10 @@ const Products = ({ productLists }) => {
             ))}
           </div>
           <div className="w-full md:w-1/3 border border-gray-100 rounded-md p-4">
-            <Cart cartProducts={cartProducts} productRemoveHandler={productRemoveHandler} />
+            <Cart
+              cartProducts={cartProducts}
+              productRemoveHandler={productRemoveHandler}
+            />
           </div>
         </div>
       </div>

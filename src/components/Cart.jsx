@@ -13,7 +13,12 @@ const Cart = ({ cartProducts, productRemoveHandler }) => {
       ) : (
         <ul>
           {cartProducts.map((product, idx) => (
-            <CartProduct key={idx} product={product} idx={idx} productRemoveHandler={productRemoveHandler} />
+            <CartProduct
+              key={idx}
+              product={product}
+              idx={idx}
+              productRemoveHandler={productRemoveHandler}
+            />
           ))}
         </ul>
       )}
