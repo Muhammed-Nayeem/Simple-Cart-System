@@ -1,19 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Article from "./Article";
 import Cart from "./Cart";
 import Product from "./Product";
+import { addToLS, getStoredCart, removeFromLS } from "../utilities/storage";
 
 const Products = ({ productLists }) => {
   let [cartProducts, setCartProducts] = useState([]);
 
   const addToCartHandler = (product) => {
     setCartProducts((prevCartProducts) => [...prevCartProducts, product]);
+    addToLS(product.prodId);
   };
+
+  // used this useEffect hook to get the data from Local-Storage which is a side-effect:
+  useEffect(() => {
+    let savedCart = [];
+    if (productLists.length) {
+      let storedCart = getStoredCart();
+      storedCart.forEach((id) => {
+        let product = productLists.find((singleProduct) => singleProduct.prodId === id);
+        savedCart.push(product);
+      });
+    }
+    setCartProducts(savedCart);
+  }, [productLists]);
 
   const productRemoveHandler = (productIndex) => {
     let remainingCartProducts = cartProducts.filter((_, index) => index !== productIndex);
     setCartProducts(remainingCartProducts);
+    removeFromLS(productIndex);
   };
+
+  console.log(cartProducts);
 
   return (
     <section className="bg-white py-10">
