@@ -7,6 +7,7 @@ import { addToLS, getStoredCart, removeFromLS } from "../utilities/storage";
 const Products = ({ productLists }) => {
   let [cartProducts, setCartProducts] = useState([]);
 
+  //product add to cart handler:
   const addToCartHandler = (product) => {
     setCartProducts((prevCartProducts) => [...prevCartProducts, product]);
     addToLS(product.prodId);
@@ -25,13 +26,12 @@ const Products = ({ productLists }) => {
     setCartProducts(savedCart);
   }, [productLists]);
 
+  //product remove from cart handler:
   const productRemoveHandler = (productIndex) => {
     let remainingCartProducts = cartProducts.filter((_, index) => index !== productIndex);
     setCartProducts(remainingCartProducts);
     removeFromLS(productIndex);
   };
-
-  console.log(cartProducts);
 
   return (
     <section className="bg-white py-10">

@@ -12,7 +12,6 @@ const saveCartToLS = (cart) => {
 };
 
 const removeFromLS = (productIndex) => {
-  console.log(productIndex);
   let storedCart = getStoredCart();
   let remainingProducts = storedCart.filter((_, index) => index !== productIndex);
   saveCartToLS(remainingProducts);
@@ -21,7 +20,6 @@ const removeFromLS = (productIndex) => {
 const addToLS = (productId) => {
   let storedCart = getStoredCart();
   storedCart.push(productId);
-  console.log(storedCart);
   saveCartToLS(storedCart);
 };
 
